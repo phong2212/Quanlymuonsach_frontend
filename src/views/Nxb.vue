@@ -5,33 +5,33 @@
         </div>
         <div class="mt-3 col-md-6">
             <h4>
-                Sách
-                <i class="fas fa-book"></i>
+                Nhà xuất bản
+                <i class="fas fa-building"></i>
             </h4>
-            <BookList v-if="filteredBooksCount > 0" :books="filteredBooks" v-model:activeIndex="activeIndex" />
-            <p v-else>Không có sách nào.</p>
+            <NxbList v-if="filteredNxbsCount > 0" :nxbs="filteredNxbs" v-model:activeIndex="activeIndex" />
+            <p v-else>Không có nhà xuất bản nào.</p>
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
                     <i class="fas fa-redo"></i> Làm mới
                 </button>
-                <button class="btn btn-sm btn-success" @click="goToAddBook">
+                <button class="btn btn-sm btn-success" @click="goToAddNxb">
                     <i class="fas fa-plus"></i> Thêm mới
                 </button>
-                <button class="btn btn-sm btn-danger" @click="removeAllBooks">
+                <button class="btn btn-sm btn-danger" @click="removeAllNxbs">
                     <i class="fas fa-trash"></i> Xóa tất cả
                 </button>
             </div>
         </div>
         <div class="mt-3 col-md-6">
-            <div v-if="activeBook">
+            <div v-if="activeNxb">
                 <h4>
-                    Chi tiết sách
-                    <i class="fas fa-bookmark"></i>
+                    Chi tiết nhà xuất bản
+                    <i class="fas fa-building-user"></i>
                 </h4>
-                <BookCard :book="activeBook" />
+                <NxbCard :nxb="activeNxb" />
                 <router-link :to="{
-                    name: 'book.edit',
-                    params: { id: activeBook._id },
+                    name: 'nxb.edit',
+                    params: { id: activeNxb._id },
                 }">
                     <span class="mt-2 badge badge-warning">
                         <i class="fas fa-edit"></i> Hiệu chỉnh</span>
@@ -41,19 +41,19 @@
     </div>
 </template>
 <script>
-import BookCard from "@/components/BookCard.vue";
+import NxbCard from "@/components/NxbCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
-import BookList from "@/components/BookList.vue";
-import BookService from "@/services/book.service";
+import NxbList from "@/components/NxbList.vue";
+import NxbService from "@/services/nxb.service";
 export default {
     components: {
-        BookCard,
+        NxbCard,
         InputSearch,
-        BookList,
+        NxbList,
     },
     data() {
         return {
-            books: [],
+            nxbs: [],
             activeIndex: -1,
             searchText: "",
         };
@@ -64,51 +64,52 @@ export default {
         },
     },
     computed: {
-        bookStrings() {
-            return this.books.map((book) => {
-                const { tenSach, donGia, nguonGoc } = book;
-                return [tenSach, donGia, nguonGoc].join("");
+        nxbStrings() {
+            return this.nxbs.map((nxb) => {
+                const { tenNxb, diaChi } = nxb;
+                return [tenNxb, diaChi].join("");
             });
         },
-        filteredBooks() {
-            if (!this.searchText) return this.books;
-            return this.books.filter((_book, index) =>
-                this.bookStrings[index].includes(this.searchText)
+        filteredNxbs() {
+            if (!this.searchText) return this.nxbs;
+            return this.nxbs.filter((_nxb, index) =>
+                this.nxbStrings[index].includes(this.searchText)
             );
         },
-        activeBook() {
+        activeNxb() {
             if (this.activeIndex < 0) return null;
-            return this.filteredBooks[this.activeIndex];
+            return this.filteredNxbs[this.activeIndex];
         },
-        filteredBooksCount() {
-            return this.filteredBooks.length;
+        filteredNxbsCount() {
+            return this.filteredNxbs.length;
         },
     },
     methods: {
-        async retrieveBooks() {
+        async retrieveNxbs() {
             try {
-                this.books = await BookService.getAll();
+                this.nxbs = await NxbService.getAll();
             } catch (error) {
                 console.log(error);
             }
         },
         refreshList() {
-            this.retrieveBooks();
+            this.retrieveNxbs();
             this.activeIndex = -1;
         },
-        async removeAllBooks() {
-            if (confirm("Bạn muốn xóa tất cả Sách?")) {
+        async removeAllNxbs() {
+            if (confirm("Bạn muốn xóa tất cả Nhà xuất bản?")) {
                 try {
-                    await BookService.deleteAll();
+                    await NxbService.deleteAll();
                     this.refreshList();
                 } catch (error) {
                     console.log(error);
                 }
             }
         },
-        goToAddBook() {
-            this.$router.push({ name: "book.add" });
+        goToAddNxb() {
+            this.$router.push({ name: "nxb.add" });
         },
+
     },
     mounted() {
         this.refreshList();

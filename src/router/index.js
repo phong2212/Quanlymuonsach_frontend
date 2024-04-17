@@ -1,10 +1,24 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Book from "@/views/Book.vue";
+import Nxb from "@/views/Nxb.vue";
+import LoginAdmin from "@/views/LoginAdmin.vue";
+
+
 const routes = [
     {
-        path: "/",
+        path: "/loginAdmin",
+        name: "loginAdmin",
+        component: LoginAdmin,
+    },
+    {
+        path: "/books",
         name: "book",
         component: Book,
+    },
+    {
+        path: "/nxb",
+        name: "nxb",
+        component: Nxb,
     },
     {
         path: "/:pathMatch(.*)*",
@@ -20,6 +34,17 @@ const routes = [
         path: "/books/:id",
         name: "book.edit",
         component: () => import("@/views/BookEdit.vue"),
+        props: true
+    },
+    {
+        path: "/nxbs/add",
+        name: "nxb.add",
+        component: () => import("@/views/NxbAdd.vue"),
+    },
+    {
+        path: "/nxbs/:id",
+        name: "nxb.edit",
+        component: () => import("@/views/NxbEdit.vue"),
         props: true
     },
 ];

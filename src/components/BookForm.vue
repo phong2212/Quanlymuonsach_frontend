@@ -22,7 +22,10 @@
         </div>
         <div class="form-group">
             <label for="maNxb">Nhà Xuất Bản</label>
-            <Field name="maNxb" type="text" class="form-control" v-model="bookLocal.maNxb" />
+            <Field name="maNxb" as="select" v-model="bookLocal.maNxb" class="form-control">
+                <option disabled value="">Chọn nhà xuất bản</option>
+                <option v-for="nxb in nxbs" :key="nxb._id" :value="nxb._id">{{ nxb.tenNxb }}</option>
+            </Field>
             <ErrorMessage name="maNxb" class="error-feedback" />
         </div>
         <div class="form-group">
@@ -41,6 +44,7 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
+import nxbService from "@/services/nxb.service";
 export default {
     components: {
         Form,
@@ -75,6 +79,7 @@ export default {
                 .required("Hãy nhập nguồn gốc!."),
         });
         return {
+            nxbs: [],
             bookLocal: this.book,
             bookFormSchema,
         };
@@ -86,6 +91,9 @@ export default {
         deleteBook() {
             this.$emit("delete:book", this.bookLocal.id);
         },
+    },
+    async mounted() {
+        this.nxbs = await nxbService.getAll();
     },
 };
 </script>
