@@ -1,13 +1,13 @@
 <template>
-    <Form @submit="submitGuest" :validation-schema="guestFormSchema">
+    <Form @submit="submitStaff" :validation-schema="staffFormSchema">
         <div class="form-group">
             <label for="taiKhoan">Tài khoản </label>
-            <Field name="taiKhoan" type="text" class="form-control" v-model="guestLocal.taiKhoan" />
+            <Field name="taiKhoan" type="text" class="form-control" v-model="staffLocal.taiKhoan" />
             <ErrorMessage name="taiKhoan" class="error-feedback" />
         </div>
         <div class="form-group">
             <label for="password">Mật khẩu</label>
-            <Field name="password" type="text" class="form-control" v-model="guestLocal.password" />
+            <Field name="password" type="text" class="form-control" v-model="staffLocal.password" />
             <ErrorMessage name="password" class="error-feedback" />
         </div>
         <div class="form-group">
@@ -25,12 +25,12 @@ export default {
         Field,
         ErrorMessage,
     },
-    emits: ["submit:guest", "delete:guest"],
+    emits: ["submit:staff", "delete:staff"],
     props: {
-        guest: { type: Object, required: true }
+        staff: { type: Object, required: true }
     },
     data() {
-        const guestFormSchema = yup.object().shape({
+        const staffFormSchema = yup.object().shape({
             taiKhoan: yup
                 .string()
                 .required("Hãy nhập tài khoản!."),
@@ -39,13 +39,13 @@ export default {
                 .required("Hãy nhập mật khẩu!.")
         });
         return {
-            guestLocal: this.guest,
-            guestFormSchema,
+            staffLocal: this.staff,
+            staffFormSchema,
         };
     },
     methods: {
-        submitGuest() {
-            this.$emit("submit:guest", this.guestLocal);
+        submitStaff() {
+            this.$emit("submit:staff", this.staffLocal);
         },
     },
     async mounted() {

@@ -1,23 +1,27 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Book from "@/views/Book.vue";
 import Nxb from "@/views/Nxb.vue";
-
-
-
+import LoginStaff from "@/views/LoginStaff.vue";
+import Login from "@/views/Login.vue";
 
 const routes = [
     {
         path: "/",
-        name: "signIn",
-        component: () => import("@/views/LoginStaff.vue"),
+        name: "login",
+        component: Login,
     },
     {
-        path: "/books",
+        path: "/admin",
+        name: "signIn",
+        component: LoginStaff,
+    },
+    {
+        path: "/admin/books",
         name: "book",
         component: Book,
     },
     {
-        path: "/nxb",
+        path: "/admin/nxb",
         name: "nxb",
         component: Nxb,
     },
@@ -27,30 +31,35 @@ const routes = [
         component: () => import("@/views/NotFound.vue"),
     },
     {
-        path: "/books/add",
+        path: "/admin/books/add",
         name: "book.add",
         component: () => import("@/views/BookAdd.vue"),
+
     },
     {
-        path: "/books/:id",
+        path: "/admin/books/:id",
         name: "book.edit",
         component: () => import("@/views/BookEdit.vue"),
-        props: true
+        props: true,
+
     },
     {
         path: "/nxbs/add",
         name: "nxb.add",
         component: () => import("@/views/NxbAdd.vue"),
+
     },
     {
         path: "/nxbs/:id",
         name: "nxb.edit",
         component: () => import("@/views/NxbEdit.vue"),
-        props: true
+        props: true,
+
     },
 ];
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
 });
+
 export default router;

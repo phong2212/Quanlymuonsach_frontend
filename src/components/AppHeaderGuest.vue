@@ -1,8 +1,6 @@
 <template>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <router-link :to="{ name: 'book' }" class="navbar-brand">
-            Quản lý
-        </router-link>
+        <a href="/" class="navbar-brand">Books Library</a>
         <div class="mr-auto navbar-nav d-flex">
             <li class="nav-item">
                 <router-link :to="{ name: 'book' }" class="nav-link">

@@ -1,7 +1,7 @@
 <template>
     <div class="page mt-5 pt-5">
-        <h4>Đăng nhập nhân viên</h4>
-        <AuthForm :staff="newStaff" @submit:staff="loginStaff" />
+        <h4>Đăng nhập độc giả</h4>
+        <LoginForm :guest="newGuest" @submit:guest="loginGuest" />
         <div class="toast" :class="{ 'show': message !== '' }" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
@@ -17,25 +17,25 @@
 </template>
 
 <script>
-import AuthForm from "@/components/AuthForm.vue";
-import StaffService from "@/services/staff.service";
+import LoginForm from "@/components/LoginForm.vue";
+import GuestService from "@/services/guest.service";
 
 export default {
     components: {
-        AuthForm,
+        LoginForm,
     },
     data() {
         return {
-            newStaff: {},
+            newGuest: {},
             message: "",
         };
     },
     methods: {
-        async loginStaff(data) {
+        async loginGuest(data) {
             try {
-                const staffList = await StaffService.getAll();
-                const matchedStaff = staffList.find(staff => staff.taiKhoan === data.taiKhoan && staff.password === data.password);
-                if (matchedStaff) {
+                const guestList = await GuestService.getAll();
+                const matchedGuest = guestList.find(guest => guest.taiKhoan === data.taiKhoan && guest.password === data.password);
+                if (matchedGuest) {
                     this.$root.isLoggedIn = true;
                     this.$router.push({ name: "book" });
                 } else {
