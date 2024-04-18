@@ -1,14 +1,15 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Book from "@/views/Book.vue";
 import Nxb from "@/views/Nxb.vue";
-import LoginAdmin from "@/views/LoginAdmin.vue";
+
+
 
 
 const routes = [
     {
-        path: "/loginAdmin",
-        name: "loginAdmin",
-        component: LoginAdmin,
+        path: "/",
+        name: "signIn",
+        component: () => import("@/views/LoginStaff.vue"),
     },
     {
         path: "/books",
