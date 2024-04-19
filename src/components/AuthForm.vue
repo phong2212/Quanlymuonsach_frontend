@@ -18,14 +18,13 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
-import nxbService from "@/services/nxb.service";
 export default {
     components: {
         Form,
         Field,
         ErrorMessage,
     },
-    emits: ["submit:staff", "delete:staff"],
+    emits: ["submit:staff"],
     props: {
         staff: { type: Object, required: true }
     },
@@ -47,9 +46,6 @@ export default {
         submitStaff() {
             this.$emit("submit:staff", this.staffLocal);
         },
-    },
-    async mounted() {
-        this.nxbs = await nxbService.getAll();
     },
 };
 </script>

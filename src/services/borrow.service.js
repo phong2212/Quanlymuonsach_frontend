@@ -1,7 +1,7 @@
 import createApiClient from "./api.service";
 
-class StaffService {
-    constructor(baseUrl = "/api/guest") {
+class BorrowService {
+    constructor(baseUrl = "/api/borrow") {
         this.api = createApiClient(baseUrl);
     }
 
@@ -17,4 +17,4 @@ class StaffService {
 
 }
 
-export default new StaffService();
+export default new BorrowService();

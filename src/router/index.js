@@ -3,12 +3,32 @@ import Book from "@/views/Book.vue";
 import Nxb from "@/views/Nxb.vue";
 import LoginStaff from "@/views/LoginStaff.vue";
 import Login from "@/views/Login.vue";
+import SignUp from "@/views/SignUp.vue";
+import Book_Screen from "@/views/Book_Screen.vue";
+import Borrow from "@/views/Borrow.vue";
+
+
 
 const routes = [
     {
         path: "/",
         name: "login",
         component: Login,
+    },
+    {
+        path: "/signup",
+        name: "signUp",
+        component: SignUp,
+    },
+    {
+        path: "/books",
+        name: "bookScreen",
+        component: Book_Screen,
+    },
+    {
+        path: "/borrow",
+        name: "borrow",
+        component: Borrow,
     },
     {
         path: "/admin",

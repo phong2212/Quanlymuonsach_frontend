@@ -66,8 +66,8 @@ export default {
     computed: {
         nxbStrings() {
             return this.nxbs.map((nxb) => {
-                const { tenNxb, diaChi } = nxb;
-                return [tenNxb, diaChi].join("");
+                const { tenNxb } = nxb;
+                return [tenNxb].join("");
             });
         },
         filteredNxbs() {
