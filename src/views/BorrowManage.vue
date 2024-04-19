@@ -22,6 +22,7 @@
                     Chi tiết mượn sách
                 </h4>
                 <BorrowCard :borrow="activeBorrow" :maDocGia="activeBorrow.maDocGia" :maSach="activeBorrow.maSach" />
+                <button class="mt-2 badge badge-warning" @click="returnBook(activeBorrow._id)">Đã Trả</button>
             </div>
         </div>
     </div>
@@ -82,7 +83,30 @@ export default {
             this.retrieveBorrows();
             this.activeIndex = -1;
         },
+        async returnBook(bookId) {
+            try {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                const formattedDate = `${day}/${month}/${year}`;
 
+                const borrow = await BorrowService.get(bookId);
+                console.log(borrow.ngayTra);
+                if (borrow.ngayTra !== "") {
+                    alert("Sách đã được trả! Cập nhật thất bại!");
+                } else {
+                    const data = {
+                        ngayTra: formattedDate,
+                    };
+
+                    await BorrowService.update(bookId, data);
+                    alert("Cập nhật ngày trả thành công!");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
     },
     mounted() {
         this.refreshList();

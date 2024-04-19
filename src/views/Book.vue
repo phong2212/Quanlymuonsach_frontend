@@ -28,7 +28,7 @@
                     Chi tiết sách
                     <i class="fas fa-bookmark"></i>
                 </h4>
-                <BookCard :book="activeBook" />
+                <BookCard :book="activeBook" :nxbId="activeBook.maNxb" />
                 <router-link :to="{
                     name: 'book.edit',
                     params: { id: activeBook._id },

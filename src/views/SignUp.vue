@@ -26,7 +26,12 @@ export default {
     },
     data() {
         return {
-            newGuest: {},
+            newGuest: {
+                ten: '',
+                hoLot: '',
+                phai: '',
+                diaChi: '',
+            },
             message: "",
         };
     },

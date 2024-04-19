@@ -16,9 +16,15 @@
                     <i class="fas fa-building"></i>
                 </router-link>
             </li>
+            <li class="nav-item">
+                <router-link :to="{ name: 'borrowManage' }" class="nav-link">
+                    Xử lý sách mượn
+                    <i class="fas fa-book-open"></i>
+                </router-link>
+            </li>
         </div>
         <div class="navbar-nav">
-            <div v-if="isLoggedIn" class="nav-item">
+            <div class="nav-item">
                 <button @click="logout" class="btn btn-danger">Đăng xuất </button>
             </div>
         </div>
@@ -27,14 +33,8 @@
 
 <script>
 export default {
-    data() {
-        return {
-            isLoggedIn: true,
-        };
-    },
     methods: {
         logout() {
-            this.isLoggedIn = false;
             this.$root.isLoggedIn = false;
             this.$router.push({ name: "signIn" });
         },

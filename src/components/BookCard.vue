@@ -4,19 +4,29 @@ import NxbService from "@/services/nxb.service";
 export default {
     props: {
         book: { type: Object, required: true },
+        nxbId: { type: String, required: true },
     },
     data() {
         return {
-            nxbName: ""
+            nxbName: "N/A"
         };
     },
     async mounted() {
-        try {
-            const nxb = await NxbService.get(this.book.maNxb);
-            this.nxbName = nxb.tenNxb;
-        } catch (error) {
-            console.log(error);
-            this.nxbName = "N/A";
+        this.fetchNxbName();
+    },
+    watch: {
+        nxbId(newVal) {
+            this.fetchNxbName();
+        }
+    },
+    methods: {
+        async fetchNxbName() {
+            try {
+                const nxb = await NxbService.get(this.nxbId);
+                this.nxbName = nxb.tenNxb;
+            } catch (error) {
+                console.error(error);
+            }
         }
     },
 };
