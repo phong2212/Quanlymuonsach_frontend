@@ -2,7 +2,8 @@
     <div v-if="book" class="page">
         <h4>Hiệu chỉnh Liên hệ</h4>
         <BookForm :book="book" @submit:book="updateBook" @delete:book="deleteBook" />
-        <div class="toast" :class="{ 'show': message !== '' }" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast bg-success" :class="{ 'show': message !== '' }" role="alert" aria-live="assertive"
+            aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
                     {{ message }}
@@ -83,7 +84,6 @@ export default {
     right: 20px;
     z-index: 1000;
     max-width: 300px;
-    background-color: green;
     color: #fff;
 }
 </style>

@@ -73,7 +73,10 @@ export default {
     methods: {
         async retrieveBorrows() {
             try {
-                this.borrows = await BorrowService.getAll();
+                const userid = this.$store.getters.getUserId;
+                const borrows = await BorrowService.getAll();
+                this.borrows = borrows.filter(borrow => borrow.maDocGia === userid);
+                console(this.borrows);
             } catch (error) {
                 console.log(error);
             }

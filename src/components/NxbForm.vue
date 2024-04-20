@@ -37,7 +37,7 @@ export default {
                 .string()
                 .required("Hãy nhập tên!.")
                 .min(2, "Tên phải ít nhất 2 ký tự.")
-                .max(20, "Tên có nhiều nhất 20 ký tự."),
+                .max(50, "Tên có nhiều nhất 50 ký tự."),
             diaChi: yup
                 .string()
                 .required("Hãy nhập địa chỉ!.")

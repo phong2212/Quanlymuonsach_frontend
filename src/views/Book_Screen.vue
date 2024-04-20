@@ -83,7 +83,7 @@ export default {
                 const month = String(today.getMonth() + 1).padStart(2, '0');
                 const day = String(today.getDate()).padStart(2, '0');
                 const formattedDate = `${day}/${month}/${year}`;
-                const userid = this.$route.query.userid;
+                const userid = this.$store.getters.getUserId;
 
                 const borrowedBooks = await BorrowService.getAll();
                 const isBookBorrowed = borrowedBooks.some(book => book.maSach === bookid && book.maDocGia === userid);

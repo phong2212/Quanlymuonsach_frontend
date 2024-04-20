@@ -45,6 +45,7 @@ import BookCard from "@/components/BookCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
 import BookList from "@/components/BookList.vue";
 import BookService from "@/services/book.service";
+import { mapState } from 'vuex';
 export default {
     components: {
         BookCard,
@@ -64,6 +65,7 @@ export default {
         },
     },
     computed: {
+        ...mapState(['isLoggedIn']),
         bookStrings() {
             return this.books.map((book) => {
                 const { tenSach, donGia, nguonGoc } = book;

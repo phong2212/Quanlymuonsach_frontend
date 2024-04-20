@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/" class="navbar-brand">Books Library</a>
+        <router-link :to="{ name: 'bookScreen' }" class="navbar-brand">Books Library</router-link>
         <div class="mr-auto navbar-nav d-flex">
             <li class="nav-item">
                 <router-link :to="{ name: 'bookScreen' }" class="nav-link">
@@ -25,9 +25,9 @@
 
 <script>
 export default {
-
     methods: {
         logout() {
+            this.$store.dispatch('updateLoggedInStatus', false);
             this.$root.isLoggedInGuest = false;
             this.$router.push({ name: "login" });
         },
