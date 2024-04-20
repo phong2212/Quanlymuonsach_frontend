@@ -1,6 +1,6 @@
 <template>
     <div v-if="nxb" class="page">
-        <h4>Hiệu chỉnh Liên hệ</h4>
+        <h4>Hiệu chỉnh Nhà Xuất Bản</h4>
         <NxbForm :nxb="nxb" @submit:nxb="updateNxb" @delete:nxb="deleteNxb" />
         <div class="toast bg-success" :class="{ 'show': message !== '' }" role="alert" aria-live="assertive"
             aria-atomic="true">
